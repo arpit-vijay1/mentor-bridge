@@ -481,8 +481,11 @@ class _ChatMainWidgetState extends State<ChatMainWidget> {
                                                                         valueOrDefault<
                                                                             String>(
                                                                           dateTimeFormat(
-                                                                              'relative',
-                                                                              listViewChatsListRecord.lastMessageSentTime),
+                                                                            'relative',
+                                                                            listViewChatsListRecord.lastMessageSentTime,
+                                                                            locale:
+                                                                                FFLocalizations.of(context).languageShortCode ?? FFLocalizations.of(context).languageCode,
+                                                                          ),
                                                                           '-',
                                                                         ),
                                                                         textAlign:

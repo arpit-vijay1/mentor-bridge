@@ -135,8 +135,13 @@ class _StudentchatcomponentWidgetState
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
                                               Text(
-                                                dateTimeFormat('relative',
-                                                    random_data.randomDate()),
+                                                dateTimeFormat(
+                                                  'relative',
+                                                  random_data.randomDate(),
+                                                  locale: FFLocalizations.of(
+                                                          context)
+                                                      .languageCode,
+                                                ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodySmall
@@ -258,8 +263,13 @@ class _StudentchatcomponentWidgetState
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
                                             Text(
-                                              dateTimeFormat('relative',
-                                                  random_data.randomDate()),
+                                              dateTimeFormat(
+                                                'relative',
+                                                random_data.randomDate(),
+                                                locale:
+                                                    FFLocalizations.of(context)
+                                                        .languageCode,
+                                              ),
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodySmall

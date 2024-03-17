@@ -425,6 +425,7 @@ class _StudentLoginWidgetState extends State<StudentLoginWidget>
                                                   0.0, 0.0, 0.0, 16.0),
                                           child: FFButtonWidget(
                                             onPressed: () async {
+                                              Function() navigate = () {};
                                               if (_model.formKey1
                                                           .currentState ==
                                                       null ||
@@ -500,19 +501,10 @@ class _StudentLoginWidgetState extends State<StudentLoginWidget>
                                                   return;
                                                 }
 
-                                                context.goNamedAuth(
-                                                  'pageload',
-                                                  context.mounted,
-                                                  extra: <String, dynamic>{
-                                                    kTransitionInfoKey:
-                                                        const TransitionInfo(
-                                                      hasTransition: true,
-                                                      transitionType:
-                                                          PageTransitionType
-                                                              .fade,
-                                                    ),
-                                                  },
-                                                );
+                                                navigate = () =>
+                                                    context.goNamedAuth(
+                                                        'pageload',
+                                                        context.mounted);
                                               } else {
                                                 // Snack: Error Message
                                                 ScaffoldMessenger.of(context)
@@ -543,6 +535,8 @@ class _StudentLoginWidgetState extends State<StudentLoginWidget>
                                                   ),
                                                 );
                                               }
+
+                                              navigate();
 
                                               setState(() {});
                                             },

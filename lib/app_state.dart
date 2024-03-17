@@ -34,6 +34,9 @@ class FFAppState extends ChangeNotifier {
     _safeInit(() {
       _selectedChat = prefs.getString('ff_selectedChat')?.ref ?? _selectedChat;
     });
+    _safeInit(() {
+      _jwttoken = prefs.getString('ff_jwttoken') ?? _jwttoken;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -90,6 +93,13 @@ class FFAppState extends ChangeNotifier {
     value != null
         ? prefs.setString('ff_selectedChat', value.path)
         : prefs.remove('ff_selectedChat');
+  }
+
+  String _jwttoken = '';
+  String get jwttoken => _jwttoken;
+  set jwttoken(String value) {
+    _jwttoken = value;
+    prefs.setString('ff_jwttoken', value);
   }
 
   final _profileManager = FutureRequestManager<ApiCallResponse>();

@@ -196,8 +196,13 @@ class _ChatMessagesDetailsWidgetState extends State<ChatMessagesDetailsWidget>
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 4.0, 0.0, 0.0),
                               child: Text(
-                                dateTimeFormat('relative',
-                                    widget.chatMessageRef!.timeCreated!),
+                                dateTimeFormat(
+                                  'relative',
+                                  widget.chatMessageRef!.timeCreated!,
+                                  locale: FFLocalizations.of(context)
+                                          .languageShortCode ??
+                                      FFLocalizations.of(context).languageCode,
+                                ),
                                 style: FlutterFlowTheme.of(context).labelSmall,
                               ).animateOnPageLoad(
                                   animationsMap['textOnPageLoadAnimation1']!),
@@ -286,8 +291,13 @@ class _ChatMessagesDetailsWidgetState extends State<ChatMessagesDetailsWidget>
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 4.0, 0.0, 0.0),
                               child: Text(
-                                dateTimeFormat('relative',
-                                    widget.chatMessageRef!.timeCreated!),
+                                dateTimeFormat(
+                                  'relative',
+                                  widget.chatMessageRef!.timeCreated!,
+                                  locale: FFLocalizations.of(context)
+                                          .languageShortCode ??
+                                      FFLocalizations.of(context).languageCode,
+                                ),
                                 style: FlutterFlowTheme.of(context).labelSmall,
                               ).animateOnPageLoad(
                                   animationsMap['textOnPageLoadAnimation2']!),

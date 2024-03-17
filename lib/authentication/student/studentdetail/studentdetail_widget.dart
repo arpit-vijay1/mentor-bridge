@@ -891,9 +891,6 @@ class _StudentdetailWidgetState extends State<StudentdetailWidget> {
                                         FlutterFlowTheme.of(context).success,
                                   ),
                                 );
-                                FFAppState().update(() {
-                                  FFAppState().email = widget.email!;
-                                });
                                 GoRouter.of(context).prepareAuthEvent();
 
                                 final user =
@@ -943,6 +940,10 @@ class _StudentdetailWidgetState extends State<StudentdetailWidget> {
                                     ),
                                   }.withoutNulls,
                                 );
+
+                                FFAppState().update(() {
+                                  FFAppState().email = widget.email!;
+                                });
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
