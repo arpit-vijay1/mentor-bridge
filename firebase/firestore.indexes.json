@@ -1,0 +1,32 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "list_messagesChat",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "chatList",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "timeCreated",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "chatsList",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "users",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "lastMessageSentTime",
+          "order": "DESCENDING"
+        }
+      ]
+    }
+  ]
+}

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'flutter_flow/request_manager.dart';
 import 'backend/api_requests/api_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'flutter_flow/flutter_flow_util.dart';
 
 class FFAppState extends ChangeNotifier {
   static FFAppState _instance = FFAppState._internal();
@@ -29,6 +30,9 @@ class FFAppState extends ChangeNotifier {
     });
     _safeInit(() {
       _UID = prefs.getString('ff_UID') ?? _UID;
+    });
+    _safeInit(() {
+      _selectedChat = prefs.getString('ff_selectedChat')?.ref ?? _selectedChat;
     });
   }
 
@@ -77,6 +81,15 @@ class FFAppState extends ChangeNotifier {
   set UID(String value) {
     _UID = value;
     prefs.setString('ff_UID', value);
+  }
+
+  DocumentReference? _selectedChat;
+  DocumentReference? get selectedChat => _selectedChat;
+  set selectedChat(DocumentReference? value) {
+    _selectedChat = value;
+    value != null
+        ? prefs.setString('ff_selectedChat', value.path)
+        : prefs.remove('ff_selectedChat');
   }
 
   final _profileManager = FutureRequestManager<ApiCallResponse>();

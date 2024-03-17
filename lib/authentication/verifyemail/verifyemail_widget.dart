@@ -1,4 +1,3 @@
-import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -413,46 +412,35 @@ class _VerifyemailWidgetState extends State<VerifyemailWidget>
                                                   ),
                                                 );
                                                 if (widget.token != '') {
-                                                  GoRouter.of(context)
-                                                      .prepareAuthEvent();
-                                                  await authManager.signIn(
-                                                    authenticationToken:
-                                                        widget.token,
-                                                    authUid: widget.userId,
+                                                  context.pushNamed(
+                                                    'pageload',
+                                                    extra: <String, dynamic>{
+                                                      kTransitionInfoKey:
+                                                          const TransitionInfo(
+                                                        hasTransition: true,
+                                                        transitionType:
+                                                            PageTransitionType
+                                                                .fade,
+                                                        duration: Duration(
+                                                            milliseconds: 0),
+                                                      ),
+                                                    },
                                                   );
-                                                  if (widget.userType ==
-                                                      'student') {
-                                                    context.goNamedAuth(
-                                                      'student_home',
-                                                      context.mounted,
-                                                      extra: <String, dynamic>{
-                                                        kTransitionInfoKey:
-                                                            const TransitionInfo(
-                                                          hasTransition: true,
-                                                          transitionType:
-                                                              PageTransitionType
-                                                                  .fade,
-                                                        ),
-                                                      },
-                                                    );
-                                                  } else {
-                                                    context.goNamedAuth(
-                                                      'mentor_home',
-                                                      context.mounted,
-                                                      extra: <String, dynamic>{
-                                                        kTransitionInfoKey:
-                                                            const TransitionInfo(
-                                                          hasTransition: true,
-                                                          transitionType:
-                                                              PageTransitionType
-                                                                  .fade,
-                                                        ),
-                                                      },
-                                                    );
-                                                  }
                                                 } else {
-                                                  context.goNamedAuth('are_you',
-                                                      context.mounted);
+                                                  context.goNamed(
+                                                    'are_you',
+                                                    extra: <String, dynamic>{
+                                                      kTransitionInfoKey:
+                                                          const TransitionInfo(
+                                                        hasTransition: true,
+                                                        transitionType:
+                                                            PageTransitionType
+                                                                .fade,
+                                                        duration: Duration(
+                                                            milliseconds: 0),
+                                                      ),
+                                                    },
+                                                  );
                                                 }
                                               } else {
                                                 // Snack: Error verify email

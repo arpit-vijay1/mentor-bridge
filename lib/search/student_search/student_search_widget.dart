@@ -58,13 +58,11 @@ class _StudentSearchWidgetState extends State<StudentSearchWidget> {
             Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
               child: FutureBuilder<ApiCallResponse>(
-                future: FFAppState().search(
-                  requestFn: () => SearchGroup.allCall.call(
-                    type: FFAppState().searchfilter,
-                    q: valueOrDefault<String>(
-                      _model.textController.text,
-                      'default',
-                    ),
+                future: SearchGroup.allCall.call(
+                  type: FFAppState().searchfilter,
+                  q: valueOrDefault<String>(
+                    _model.textController.text,
+                    'default',
                   ),
                 ),
                 builder: (context, snapshot) {
@@ -220,14 +218,12 @@ class _StudentSearchWidgetState extends State<StudentSearchWidget> {
                               0.0, 10.0, 0.0, 0.0),
                           child: Builder(
                             builder: (context) {
-                              final name = (SearchGroup.allCall
-                                          .results(
-                                            columnAllResponse.jsonBody,
-                                          )
-                                          ?.toList() ??
-                                      [])
-                                  .take(10000)
-                                  .toList();
+                              final name = SearchGroup.allCall
+                                      .results(
+                                        columnAllResponse.jsonBody,
+                                      )
+                                      ?.toList() ??
+                                  [];
                               return ListView.builder(
                                 padding: EdgeInsets.zero,
                                 primary: false,

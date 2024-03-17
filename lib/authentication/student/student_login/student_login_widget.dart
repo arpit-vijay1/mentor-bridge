@@ -1,4 +1,4 @@
-import '/auth/custom_auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -487,26 +487,21 @@ class _StudentLoginWidgetState extends State<StudentLoginWidget>
                                                 );
                                                 GoRouter.of(context)
                                                     .prepareAuthEvent();
-                                                await authManager.signIn(
-                                                  authenticationToken:
-                                                      AuthenticationGroup
-                                                          .studentLoginCall
-                                                          .token(
-                                                    (_model.loggedInResponse
-                                                            ?.jsonBody ??
-                                                        ''),
-                                                  ),
-                                                  authUid: AuthenticationGroup
-                                                      .studentLoginCall
-                                                      .studentid(
-                                                    (_model.loggedInResponse
-                                                            ?.jsonBody ??
-                                                        ''),
-                                                  ),
+
+                                                final user = await authManager
+                                                    .signInWithEmail(
+                                                  context,
+                                                  _model.emailAddressController
+                                                      .text,
+                                                  _model
+                                                      .passwordController.text,
                                                 );
+                                                if (user == null) {
+                                                  return;
+                                                }
 
                                                 context.goNamedAuth(
-                                                  'student_home',
+                                                  'pageload',
                                                   context.mounted,
                                                   extra: <String, dynamic>{
                                                     kTransitionInfoKey:

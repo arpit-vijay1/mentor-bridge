@@ -41,3 +41,8 @@ export '/chat/student_chat/studentchat_message/studentchat_message_widget.dart'
     show StudentchatMessageWidget;
 export '/home/student_home/student_home/student_home_widget.dart'
     show StudentHomeWidget;
+export '/chatfirebase/user_list_start_chat/user_list_start_chat_widget.dart'
+    show UserListStartChatWidget;
+export '/chatfirebase/chat_mobile_details/chat_mobile_details_widget.dart'
+    show ChatMobileDetailsWidget;
+export '/chatfirebase/chat_main/chat_main_widget.dart' show ChatMainWidget;

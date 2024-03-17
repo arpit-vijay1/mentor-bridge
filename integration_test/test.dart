@@ -10,8 +10,9 @@ import 'package:mentor_bridge/main.dart';
 import 'package:mentor_bridge/flutter_flow/flutter_flow_util.dart';
 
 import 'package:provider/provider.dart';
-
-import 'package:mentor_bridge/auth/custom_auth/auth_util.dart';
+import 'package:mentor_bridge/backend/firebase/firebase_config.dart';
+import 'package:mentor_bridge/auth/firebase_auth/auth_util.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 void main() async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();

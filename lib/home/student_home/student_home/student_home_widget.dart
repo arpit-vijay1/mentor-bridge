@@ -1,17 +1,16 @@
 import '/app_component/student_navbar/student_navbar_widget.dart';
 import '/backend/api_requests/api_calls.dart';
-import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/home/student_home/student_channel/nochannel/nochannel_widget.dart';
 import '/home/student_home/student_channel/student_channelsearch/student_channelsearch_widget.dart';
 import '/home/student_home/student_notification/student_notification_widget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
 import 'package:sticky_headers/sticky_headers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -25,26 +24,10 @@ class StudentHomeWidget extends StatefulWidget {
   State<StudentHomeWidget> createState() => _StudentHomeWidgetState();
 }
 
-class _StudentHomeWidgetState extends State<StudentHomeWidget>
-    with TickerProviderStateMixin {
+class _StudentHomeWidgetState extends State<StudentHomeWidget> {
   late StudentHomeModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
-  final animationsMap = {
-    'textOnPageLoadAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        ShimmerEffect(
-          curve: Curves.easeIn,
-          delay: 600.ms,
-          duration: 730.ms,
-          color: const Color(0xD9EEAB60),
-          angle: 0.524,
-        ),
-      ],
-    ),
-  };
 
   @override
   void initState() {
@@ -123,8 +106,7 @@ class _StudentHomeWidgetState extends State<StudentHomeWidget>
                                         maxLines: 1,
                                         style: FlutterFlowTheme.of(context)
                                             .headlineMedium,
-                                      ).animateOnPageLoad(animationsMap[
-                                          'textOnPageLoadAnimation']!),
+                                      ),
                                     ),
                                   ),
                                   Padding(
@@ -660,25 +642,31 @@ class _StudentHomeWidgetState extends State<StudentHomeWidget>
                               color: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
                             ),
-                            child: ListView(
-                              padding: EdgeInsets.zero,
-                              scrollDirection: Axis.vertical,
-                              children: [
-                                Container(
-                                  width: 100.0,
-                                  height: 100.0,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                  ),
-                                  child: wrapWithModel(
-                                    model: _model.studentChannelsearchModel,
-                                    updateCallback: () => setState(() {}),
-                                    updateOnChange: true,
-                                    child: const StudentChannelsearchWidget(),
-                                  ),
-                                ),
-                              ],
+                            child: Builder(
+                              builder: (context) {
+                                final channel = SearchGroup.allCall
+                                        .results(
+                                          stackAllResponse.jsonBody,
+                                        )
+                                        ?.toList() ??
+                                    [];
+                                if (channel.isEmpty) {
+                                  return const NochannelWidget();
+                                }
+                                return ListView.builder(
+                                  padding: EdgeInsets.zero,
+                                  primary: false,
+                                  scrollDirection: Axis.vertical,
+                                  itemCount: channel.length,
+                                  itemBuilder: (context, channelIndex) {
+                                    final channelItem = channel[channelIndex];
+                                    return StudentChannelsearchWidget(
+                                      key: Key(
+                                          'Keyu8u_${channelIndex}_of_${channel.length}'),
+                                    );
+                                  },
+                                );
+                              },
                             ),
                           ),
                         ],

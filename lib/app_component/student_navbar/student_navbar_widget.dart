@@ -305,7 +305,7 @@ class _StudentNavbarWidgetState extends State<StudentNavbarWidget>
                               ),
                               onPressed: () async {
                                 context.pushNamed(
-                                  'student_message',
+                                  'chat_main',
                                   extra: <String, dynamic>{
                                     kTransitionInfoKey: const TransitionInfo(
                                       hasTransition: true,

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "561194548673",
+    "project_id": "mentorbridge-8f0e9",
+    "storage_bucket": "mentorbridge-8f0e9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:561194548673:android:edb499f8856803676dc340",
+        "android_client_info": {
+          "package_name": "com.mentorbridge.mentorbridge"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsReP98lXr2EE8e5hdxGpvPyM-LUq1VV0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,12 +1,10 @@
 import '/app_component/student_navbar/student_navbar_widget.dart';
-import '/auth/custom_auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
-import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'student_profile_model.dart';
@@ -19,26 +17,10 @@ class StudentProfileWidget extends StatefulWidget {
   State<StudentProfileWidget> createState() => _StudentProfileWidgetState();
 }
 
-class _StudentProfileWidgetState extends State<StudentProfileWidget>
-    with TickerProviderStateMixin {
+class _StudentProfileWidgetState extends State<StudentProfileWidget> {
   late StudentProfileModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
-  final animationsMap = {
-    'containerOnPageLoadAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        FadeEffect(
-          curve: Curves.easeIn,
-          delay: 220.ms,
-          duration: 280.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-      ],
-    ),
-  };
 
   @override
   void initState() {
@@ -266,8 +248,7 @@ class _StudentProfileWidgetState extends State<StudentProfileWidget>
                             ),
                           ],
                         ),
-                      ).animateOnPageLoad(
-                          animationsMap['containerOnPageLoadAnimation']!),
+                      ),
                     ],
                   ),
                   Padding(

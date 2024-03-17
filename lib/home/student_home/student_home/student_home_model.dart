@@ -1,6 +1,5 @@
 import '/app_component/student_navbar/student_navbar_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/home/student_home/student_channel/student_channelsearch/student_channelsearch_widget.dart';
 import 'student_home_widget.dart' show StudentHomeWidget;
 import 'package:flutter/material.dart';
 
@@ -20,8 +19,6 @@ class StudentHomeModel extends FlutterFlowModel<StudentHomeWidget> {
           pageViewController!.page != null
       ? pageViewController!.page!.round()
       : 0;
-  // Model for student_channelsearch component.
-  late StudentChannelsearchModel studentChannelsearchModel;
   // Model for student_navbar component.
   late StudentNavbarModel studentNavbarModel;
 
@@ -29,8 +26,6 @@ class StudentHomeModel extends FlutterFlowModel<StudentHomeWidget> {
 
   @override
   void initState(BuildContext context) {
-    studentChannelsearchModel =
-        createModel(context, () => StudentChannelsearchModel());
     studentNavbarModel = createModel(context, () => StudentNavbarModel());
   }
 
@@ -40,7 +35,6 @@ class StudentHomeModel extends FlutterFlowModel<StudentHomeWidget> {
     textFieldFocusNode?.dispose();
     textController?.dispose();
 
-    studentChannelsearchModel.dispose();
     studentNavbarModel.dispose();
   }
 

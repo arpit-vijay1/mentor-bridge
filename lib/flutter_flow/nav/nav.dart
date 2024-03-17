@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '/backend/backend.dart';
 
-
-import '/auth/custom_auth/custom_auth_user_provider.dart';
+import '/auth/base_auth_user_provider.dart';
 
 import '/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -21,8 +21,8 @@ class AppStateNotifier extends ChangeNotifier {
   static AppStateNotifier? _instance;
   static AppStateNotifier get instance => _instance ??= AppStateNotifier._();
 
-  MentorBridgeAuthUser? initialUser;
-  MentorBridgeAuthUser? user;
+  BaseAuthUser? initialUser;
+  BaseAuthUser? user;
   bool showSplashImage = true;
   String? _redirectLocation;
 
@@ -47,7 +47,7 @@ class AppStateNotifier extends ChangeNotifier {
   /// to perform subsequent actions (such as navigation) afterwards.
   void updateNotifyOnAuthChange(bool notify) => notifyOnAuthChange = notify;
 
-  void update(MentorBridgeAuthUser newUser) {
+  void update(BaseAuthUser newUser) {
     final shouldUpdate =
         user?.uid == null || newUser.uid == null || user?.uid != newUser.uid;
     initialUser ??= newUser;
@@ -206,6 +206,31 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
           name: 'student_home',
           path: '/studentHome',
           builder: (context, params) => const StudentHomeWidget(),
+        ),
+        FFRoute(
+          name: 'userList_StartChat',
+          path: '/userListStartChat',
+          builder: (context, params) => const UserListStartChatWidget(),
+        ),
+        FFRoute(
+          name: 'chat_mobileDetails',
+          path: '/chatMobileDetails',
+          asyncParams: {
+            'chatListRef': getDoc(['chatsList'], ChatsListRecord.fromSnapshot),
+          },
+          builder: (context, params) => ChatMobileDetailsWidget(
+            chatListRef: params.getParam('chatListRef', ParamType.Document),
+          ),
+        ),
+        FFRoute(
+          name: 'chat_main',
+          path: '/chatMain',
+          asyncParams: {
+            'newChat': getDoc(['chatsList'], ChatsListRecord.fromSnapshot),
+          },
+          builder: (context, params) => ChatMainWidget(
+            newChat: params.getParam('newChat', ParamType.Document),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -324,6 +349,7 @@ class FFParameters {
     String paramName,
     ParamType type, [
     bool isList = false,
+    List<String>? collectionNamePath,
   ]) {
     if (futureParamValues.containsKey(paramName)) {
       return futureParamValues[paramName];
@@ -337,11 +363,8 @@ class FFParameters {
       return param;
     }
     // Return serialized value.
-    return deserializeParam<T>(
-      param,
-      type,
-      isList,
-    );
+    return deserializeParam<T>(param, type, isList,
+        collectionNamePath: collectionNamePath);
   }
 }
 

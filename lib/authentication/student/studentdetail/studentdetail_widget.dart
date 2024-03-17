@@ -1,4 +1,6 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_choice_chips.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -8,6 +10,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'studentdetail_model.dart';
 export 'studentdetail_model.dart';
 
@@ -56,6 +59,8 @@ class _StudentdetailWidgetState extends State<StudentdetailWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -886,9 +891,33 @@ class _StudentdetailWidgetState extends State<StudentdetailWidget> {
                                         FlutterFlowTheme.of(context).success,
                                   ),
                                 );
+                                FFAppState().update(() {
+                                  FFAppState().email = widget.email!;
+                                });
+                                GoRouter.of(context).prepareAuthEvent();
 
-                                context.pushNamed(
+                                final user =
+                                    await authManager.createAccountWithEmail(
+                                  context,
+                                  widget.email!,
+                                  widget.password!,
+                                );
+                                if (user == null) {
+                                  return;
+                                }
+
+                                await UsersRecord.collection
+                                    .doc(user.uid)
+                                    .update(createUsersRecordData(
+                                      email: widget.email,
+                                      displayName:
+                                          _model.fullNameController.text,
+                                      phoneNumber: _model.phoneController.text,
+                                    ));
+
+                                context.pushNamedAuth(
                                   'verifyemail',
+                                  context.mounted,
                                   queryParameters: {
                                     'email': serializeParam(
                                       widget.email,
@@ -909,15 +938,11 @@ class _StudentdetailWidgetState extends State<StudentdetailWidget> {
                                       ParamType.String,
                                     ),
                                     'userType': serializeParam(
-                                      'student',
+                                      FFAppState().usertype,
                                       ParamType.String,
                                     ),
                                   }.withoutNulls,
                                 );
-
-                                FFAppState().update(() {
-                                  FFAppState().email = widget.email!;
-                                });
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(

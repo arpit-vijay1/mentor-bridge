@@ -1,4 +1,3 @@
-import '/app_component/student_navbar/student_navbar_widget.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/chat/student_chat/studentaddchat/studentaddchat_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -357,14 +356,6 @@ class _StudentMessageWidgetState extends State<StudentMessageWidget> {
                         ),
                       ),
                     ],
-                  ),
-                  wrapWithModel(
-                    model: _model.studentNavbarModel,
-                    updateCallback: () => setState(() {}),
-                    child: const StudentNavbarWidget(
-                      selectedPageIndex: 3,
-                      hidden: false,
-                    ),
                   ),
                 ],
               ),
